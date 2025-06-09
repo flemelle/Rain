@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  monsite-php:
+    image: php:8.2-apache
+    container_name: rain
+    volumes:
+      - ./src:/var/www/html
+    environment:
+      - VIRTUAL_HOST=rain.tiphereth.site,www.rain.tiphereth.site
+      - LETSENCRYPT_HOST=rain.tiphereth.site,www.rain.tiphereth.site
+      - LETSENCRYPT_EMAIL=admin@tiphereth.site
+    networks:
+      - web
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true
